@@ -1,4 +1,5 @@
 use std::io;
+use std::cmp::Ordering;
 use rand::Rng;
 
 
@@ -26,4 +27,14 @@ fn main() {
 
     // Print the guess with the {} placeholder syntax
     println!("Guess: {}", guess);
+
+    // Convert String to Number
+    let guess: u32 = guess.trim().parse().expect("Wanted a number, received a String");
+
+    // Pattern Matching
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too Small! :("),
+        Ordering::Equal => println!("Equal! Win! :)"),
+        Ordering::Greater => println!("Too Big! :("),
+    }
 }
