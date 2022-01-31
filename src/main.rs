@@ -30,7 +30,10 @@ fn main() {
         println!("Guess: {}", guess);
 
         // Convert String to Number
-        let guess: u32 = guess.trim().parse().expect("Wanted a number, received a String");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         // Pattern Matching
         match guess.cmp(&secret_number) {
@@ -44,5 +47,5 @@ fn main() {
     }
 
     println!("Game will now exit");
-    
+
 }
