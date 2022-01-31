@@ -32,7 +32,10 @@ fn main() {
         // Convert String to Number
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(_) => {
+                println!("Error: wanted a number");
+                continue;
+            },
         };
 
         // Pattern Matching
