@@ -11,30 +11,38 @@ fn main() {
 
     println!("The secret generated number is: {}", secret_number);
 
+    loop {
 
-    println!("Please input your guess.");
+        println!("Please input your guess.");
 
-    // Let => Create a new variable
-    // mut means that it is mutable (const is the default)
-    let mut guess = String::new();
+        // Let => Create a new variable
+        // mut means that it is mutable (const is the default)
+        let mut guess = String::new();
 
-    // Read line from input, appending into the given String
-    // The string is given as a mutable reference.
-    // References are mutable, hence the &mut
-    io::stdin()
-    .read_line(&mut guess)
-    .expect("Error during line read"); // Faillure Handling, will cause termination of program if hit
+        // Read line from input, appending into the given String
+        // The string is given as a mutable reference.
+        // References are mutable, hence the &mut
+        io::stdin()
+        .read_line(&mut guess)
+        .expect("Error during line read"); // Faillure Handling, will cause termination of program if hit
 
-    // Print the guess with the {} placeholder syntax
-    println!("Guess: {}", guess);
+        // Print the guess with the {} placeholder syntax
+        println!("Guess: {}", guess);
 
-    // Convert String to Number
-    let guess: u32 = guess.trim().parse().expect("Wanted a number, received a String");
+        // Convert String to Number
+        let guess: u32 = guess.trim().parse().expect("Wanted a number, received a String");
 
-    // Pattern Matching
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too Small! :("),
-        Ordering::Equal => println!("Equal! Win! :)"),
-        Ordering::Greater => println!("Too Big! :("),
+        // Pattern Matching
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too Small! :("),
+            Ordering::Equal => { 
+                println!("Equal! Win! :)");
+                break;
+            },
+            Ordering::Greater => println!("Too Big! :("),
+        }
     }
+
+    println!("Game will now exit");
+    
 }
